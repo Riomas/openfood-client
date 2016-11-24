@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.cert.CertificateException;
 
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
@@ -25,9 +27,10 @@ public class ProductRepository {
 			String nextUrl = jsonLinks.getString("next");
 			logger.info("nextUrl: "+nextUrl);
 			logger.info("results: "+jsonArrayProducts.length());
+			int count = 1;
 			for (Object jsonObj: jsonArrayProducts.toList()) {
-				logger.debug("jsonObj: "+jsonObj.toString());
-			}
+				logger.debug("["+(count++)+"] jsonObj: "+jsonObj.toString());
+			} 
 				
 			return jsonArrayProducts.toString();
 		} catch (MalformedURLException e) {
@@ -37,6 +40,12 @@ public class ProductRepository {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (KeyManagementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CertificateException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
