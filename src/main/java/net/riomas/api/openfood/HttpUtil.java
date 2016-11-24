@@ -66,13 +66,13 @@ public class HttpUtil {
 
 		try {
 
-			logger.debug("keystore: " + new File("store/keystore").getAbsolutePath());
+			logger.debug("keystore: " + new File("store/keystore.jks").getAbsolutePath());
 
 			// Trust own CA and all self-signed certs
-			SSLContext sslcontext = SSLContexts.custom().loadTrustMaterial(new File("store/keystore"),
+			SSLContext sslcontext = SSLContexts.custom().loadTrustMaterial(new File("store/keystore.jks"),
 					"nopassword".toCharArray(), new TrustSelfSignedStrategy()).build();
 
-			// Allow TLSv1 protocol only
+		// Allow TLSv1 protocol only
 			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslcontext, new String[] { "TLSv1" },
 					null, SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 			return HttpClients.custom().setSSLSocketFactory(sslsf).build();
