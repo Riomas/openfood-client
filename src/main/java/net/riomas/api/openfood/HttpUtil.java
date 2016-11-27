@@ -23,8 +23,10 @@ public class HttpUtil {
 		try {
 			HttpGet httpget = new HttpGet(url.toURI());
 
-			logger.info("Executing request " + httpget.getRequestLine());
-
+			if (logger.isDebugEnabled()) {
+				logger.debug("Executing request " + httpget.getRequestLine());
+			}
+			
 			// Create a custom response handler
 			ResponseHandler<String> responseHandler = new ResponseHandler<String>() {
 
@@ -41,8 +43,10 @@ public class HttpUtil {
 
 			};
 			responseBody = httpclient.execute(httpget, responseHandler);
-			logger.info("----------------------------------------");
-			logger.info(responseBody);
+			if (logger.isDebugEnabled()) {
+				logger.debug("----------------------------------------");
+				logger.debug(responseBody);
+			}
 		} finally {
 			httpclient.close();
 		}
