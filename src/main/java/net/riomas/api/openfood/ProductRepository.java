@@ -28,6 +28,7 @@ public class ProductRepository {
 			JSONObject jsonLinks = jsonObject.getJSONObject("links");
 			
 			String nextUrl = jsonLinks.getString("next");
+
 			if (logger.isDebugEnabled()) {
 				logger.debug("nextUrl: "+nextUrl);
 			}
