@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.cert.CertificateException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +34,7 @@ public class ProductRepository {
 			if (logger.isDebugEnabled()) {
 				logger.debug("nextUrl: "+nextUrl);
 			}
-			
-//			logger.info("results: "+jsonArrayProducts.length());
-//			for (Object jsonObj: jsonArrayProducts.toList()) {
-//				logger.debug("jsonObj: "+jsonObj.toString());
-//			}
-			
+
 			List<?> products = new Gson().fromJson(jsonArrayProducts.toString(), List.class);
 			if (logger.isDebugEnabled()) {
 				logger.debug("product: "+products.size());
@@ -48,14 +45,15 @@ public class ProductRepository {
 			return products;
 			
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("MalformedURLException", e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("IOException", e);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("URISyntaxException", e);
+		} catch (KeyManagementException e) {
+			logger.error("KeyManagementException", e);
+		} catch (CertificateException e) {
+			logger.error("CertificateException", e);
 		}
 		return new ArrayList<>();
 	}
